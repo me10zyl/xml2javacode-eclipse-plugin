@@ -11,6 +11,7 @@ import javax.annotation.PreDestroy;
 import net.xicp.zyl_me.xml2javacode.CodeGenerator;
 import net.xicp.zyl_me.xml2javacode.DescriptionFileFormatNotCorrectException;
 import net.xicp.zyl_me.xml2javacode.ElementNotFoundException;
+import net.xicp.zyl_me.xml2javacode.Utils;
 
 import org.dom4j.DocumentException;
 import org.eclipse.swt.SWT;
@@ -23,6 +24,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -44,9 +46,8 @@ public class Xml2JavaCodeView2 extends ViewPart {
 	 */
 	@PostConstruct
 	public void createControls(final Composite parent) {
-		parent.setLayout(null);
+		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setBounds(0, 0, 837, 186);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		Composite composite = new Composite(scrolledComposite, SWT.NO_MERGE_PAINTS);
@@ -89,14 +90,18 @@ public class Xml2JavaCodeView2 extends ViewPart {
 		GridData gd_textArea = new GridData(SWT.FILL, SWT.FILL, false, false, 2, 3);
 		gd_textArea.widthHint = 319;
 		textArea.setLayoutData(gd_textArea);
-		final Group group = new Group(composite, SWT.NONE);
-		group.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 2));
+		ScrolledComposite scrolledComposite_1 = new ScrolledComposite(composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 2));
+		scrolledComposite_1.setExpandHorizontal(true);
+		scrolledComposite_1.setExpandVertical(true);
+		final Group group = new Group(scrolledComposite_1, SWT.NONE);
 		group.setText("\u590D\u5236\u2193\u2193\u2193");
 		group.setLayout(new FillLayout(SWT.HORIZONTAL));
 		Button btnNewButton_2 = new Button(group, SWT.NONE);
 		btnNewButton_2.setText("\u6DF1\u5EA60\u5143\u7D20");
+		scrolledComposite_1.setContent(group);
+		scrolledComposite_1.setMinSize(group.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		new Label(composite, SWT.NONE);
-		
 		Button btnSeeOutputs = new Button(composite, SWT.NONE);
 		btnSeeOutputs.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -127,9 +132,13 @@ public class Xml2JavaCodeView2 extends ViewPart {
 					textArea.setText(xml2javacodeSimple);
 					int maxDepth = codeGenerator.getMaxDepth(file);
 					if (maxDepth > 0) {
+						Control[] children = group.getChildren();
+						for (int i = 0; i < children.length; i++)
+							children[i].dispose();
 					}
 					for (int i = 0; i <= maxDepth; i++) {
 						Button btn = new Button(group, SWT.PUSH);
+						btn.setText("深度" + i + "元素");
 						btn.setData(i);
 						btn.addSelectionListener(new SelectionListener() {
 							@Override
@@ -141,7 +150,7 @@ public class Xml2JavaCodeView2 extends ViewPart {
 									if (!"".equals(descriptionFilePath) && descriptionFilePath != null) {
 										descriptionFile = new File(descriptionFilePath);
 									}
-									String text = codeGenerator.xml2javacodeByDepth(file, (Integer) e.data, btnCheckButtonAttributeAsField.getSelection(), descriptionFile);
+									String text = codeGenerator.xml2javacodeByDepth(file, (Integer)((Button) e.getSource()).getData(), btnCheckButtonAttributeAsField.getSelection(), descriptionFile);
 									StringSelection stsel = new StringSelection(text);
 									Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
 								} catch (NumberFormatException e1) {
@@ -168,50 +177,53 @@ public class Xml2JavaCodeView2 extends ViewPart {
 							}
 						});
 					}
-					// if (maxDepth > 0) {
-					// JButton btn = new JButton("所有深度元素");
-					// btn.addActionListener(new ActionListener() {
-					// public void actionPerformed(ActionEvent e) {
-					// // TODO Auto-generated method stub
-					// try {
-					// String descriptionFilePath =
-					// descriptionFileTextField.getText();
-					// File descriptionFile = null;
-					// if (!"".equals(descriptionFilePath) &&
-					// descriptionFilePath != null) {
-					// descriptionFile = new File(descriptionFilePath);
-					// }
-					// String text =
-					// codeGenerator.xml2javacode(Utils.readFile(file),
-					// "/*",isPrintAttributecheckBox.isSelected(),
-					// descriptionFile);
-					// StringSelection stsel = new StringSelection(text);
-					// Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel,
-					// stsel);
-					// } catch (DocumentException e1) {
-					// // TODO Auto-generated catch block
-					// e1.printStackTrace();
-					// JOptionPane.showMessageDialog(UIMain.this,
-					// e1.getMessage());
-					// } catch (IOException e1) {
-					// // TODO Auto-generated catch block
-					// e1.printStackTrace();
-					// JOptionPane.showMessageDialog(UIMain.this,
-					// e1.getMessage());
-					// } catch (ElementNotFoundException e1) {
-					// // TODO Auto-generated catch block
-					// e1.printStackTrace();
-					// JOptionPane.showMessageDialog(UIMain.this,
-					// e1.getMessage());
-					// } catch (DescriptionFileFormatNotCorrectException e1) {
-					// // TODO Auto-generated catch block
-					// JOptionPane.showMessageDialog(UIMain.this,
-					// e1.getMessage());
-					// e1.printStackTrace();
-					// }
-					// }
-					// });
-					// }
+					// scrolledCompositeElement.update();
+					// scrolledCompositeElement.redraw();
+					// scrolledCompositeElement.layout();
+					group.update();
+					group.redraw();
+					group.layout();
+					if (maxDepth > 0) {
+						Button btn = new Button(group, SWT.PUSH);
+						btn.setText("所有深度元素");
+						btn.addSelectionListener(new SelectionListener() {
+							@Override
+							public void widgetSelected(SelectionEvent arg0) {
+								// TODO 自动生成的方法存根
+								// TODO Auto-generated method stub
+								try {
+									String descriptionFilePath = textDescriptionFile.getText();
+									File descriptionFile = null;
+									if (!"".equals(descriptionFilePath) && descriptionFilePath != null) {
+										descriptionFile = new File(descriptionFilePath);
+									}
+									String text = codeGenerator.xml2javacode(Utils.readFile(file), "/*", btnCheckButtonAttributeAsField.getSelection(), descriptionFile);
+									StringSelection stsel = new StringSelection(text);
+									Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stsel, stsel);
+								} catch (DocumentException e1) {
+									// TODO Auto-generated catch block
+									e1(parent, e1);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1(parent, e1);
+								} catch (ElementNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1(parent, e1);
+								} catch (DescriptionFileFormatNotCorrectException e1) {
+									// TODO Auto-generated catch block
+									e1(parent, e1);
+								}
+							}
+
+							@Override
+							public void widgetDefaultSelected(SelectionEvent arg0) {
+								// TODO 自动生成的方法存根
+							}
+						});
+					}
+					group.update();
+					group.redraw();
+					group.layout();
 				} catch (DocumentException e1) {
 					// TODO Auto-generated catch block
 					e1(parent, e1);
