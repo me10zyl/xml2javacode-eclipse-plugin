@@ -34,5 +34,28 @@
             file="contexts.xml">
       </contexts>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="xml2javacode.contribution1"
+            nameFilter="*.xml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="xml2javacode.menu1"
+               label="XML to Java Code Menu"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="xml2javacode.popup.actions.CopyXMLFilePath2ViewAction"
+               enablesFor="1"
+               id="xml2javacode.newAction"
+               label="XML to Java Code"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>

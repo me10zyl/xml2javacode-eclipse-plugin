@@ -38,6 +38,14 @@ public class Xml2JavaCodeView2 extends ViewPart {
 	private Text textArea;
 	private CodeGenerator generator = new CodeGenerator();
 
+	public Text getTextXML() {
+		return textXML;
+	}
+
+	public void setTextXML(Text textXML) {
+		this.textXML = textXML;
+	}
+
 	public Xml2JavaCodeView2() {
 	}
 

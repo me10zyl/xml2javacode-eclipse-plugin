@@ -5,7 +5,8 @@ Bundle-SymbolicName: xml2javacode;singleton:=true
 Bundle-Version: 1.0.0.snapshot
 Bundle-Activator: xml2javacode.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
@@ -20,3 +21,4 @@ Bundle-ClassPath: .,
  lib/XML2JavaCode-jar.jar,
  lib/xmlParserAPIs-2.6.2.jar,
  lib/xom-1.0.jar
+Import-Package: org.eclipse.jdt.core
