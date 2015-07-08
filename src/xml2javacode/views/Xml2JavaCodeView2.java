@@ -94,13 +94,13 @@ public class Xml2JavaCodeView2 extends ViewPart {
 		scrolledComposite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 2));
 		scrolledComposite_1.setExpandHorizontal(true);
 		scrolledComposite_1.setExpandVertical(true);
-		final Group group = new Group(scrolledComposite_1, SWT.NONE);
-		group.setText("\u590D\u5236\u2193\u2193\u2193");
-		group.setLayout(new FillLayout(SWT.HORIZONTAL));
-		Button btnNewButton_2 = new Button(group, SWT.NONE);
+		final Group grpx = new Group(scrolledComposite_1, SWT.NONE);
+		grpx.setText("\u590D\u5236\u6DF1\u5EA6\u4E3AX\u7684\u5143\u7D20\u2193\u2193\u2193");
+		grpx.setLayout(new FillLayout(SWT.HORIZONTAL));
+		Button btnNewButton_2 = new Button(grpx, SWT.NONE);
 		btnNewButton_2.setText("\u6DF1\u5EA60\u5143\u7D20");
-		scrolledComposite_1.setContent(group);
-		scrolledComposite_1.setMinSize(group.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite_1.setContent(grpx);
+		scrolledComposite_1.setMinSize(grpx.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		new Label(composite, SWT.NONE);
 		Button btnSeeOutputs = new Button(composite, SWT.NONE);
 		btnSeeOutputs.addSelectionListener(new SelectionAdapter() {
@@ -132,13 +132,13 @@ public class Xml2JavaCodeView2 extends ViewPart {
 					textArea.setText(xml2javacodeSimple);
 					int maxDepth = codeGenerator.getMaxDepth(file);
 					if (maxDepth > 0) {
-						Control[] children = group.getChildren();
+						Control[] children = grpx.getChildren();
 						for (int i = 0; i < children.length; i++)
 							children[i].dispose();
 					}
 					for (int i = 0; i <= maxDepth; i++) {
-						Button btn = new Button(group, SWT.PUSH);
-						btn.setText("深度" + i + "元素");
+						Button btn = new Button(grpx, SWT.PUSH);
+						btn.setText(""+i);
 						btn.setData(i);
 						btn.addSelectionListener(new SelectionListener() {
 							@Override
@@ -180,12 +180,12 @@ public class Xml2JavaCodeView2 extends ViewPart {
 					// scrolledCompositeElement.update();
 					// scrolledCompositeElement.redraw();
 					// scrolledCompositeElement.layout();
-					group.update();
-					group.redraw();
-					group.layout();
+					grpx.update();
+					grpx.redraw();
+					grpx.layout();
 					if (maxDepth > 0) {
-						Button btn = new Button(group, SWT.PUSH);
-						btn.setText("所有深度元素");
+						Button btn = new Button(grpx, SWT.PUSH);
+						btn.setText("全部");
 						btn.addSelectionListener(new SelectionListener() {
 							@Override
 							public void widgetSelected(SelectionEvent arg0) {
@@ -221,9 +221,9 @@ public class Xml2JavaCodeView2 extends ViewPart {
 							}
 						});
 					}
-					group.update();
-					group.redraw();
-					group.layout();
+					grpx.update();
+					grpx.redraw();
+					grpx.layout();
 				} catch (DocumentException e1) {
 					// TODO Auto-generated catch block
 					e1(parent, e1);
