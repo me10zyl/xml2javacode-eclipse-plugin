@@ -2,9 +2,7 @@ package xml2javacode.popup.actions;
 
 import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
@@ -14,8 +12,6 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.ViewPart;
-
 import xml2javacode.views.Xml2JavaCodeView2;
 
 public class CopyXMLFilePath2ViewAction implements IObjectActionDelegate {
@@ -32,6 +28,7 @@ public class CopyXMLFilePath2ViewAction implements IObjectActionDelegate {
 	/**
 	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
 	 */
+	@Override
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		shell = targetPart.getSite().getShell();
 		this.targetPart = targetPart;
@@ -40,6 +37,7 @@ public class CopyXMLFilePath2ViewAction implements IObjectActionDelegate {
 	/**
 	 * @see IActionDelegate#run(IAction)
 	 */
+	@Override
 	public void run(IAction action) {
 		IWorkbenchPage page = targetPart.getSite().getWorkbenchWindow().getActivePage();
 		/*MessageDialog.openInformation(
@@ -65,6 +63,7 @@ public class CopyXMLFilePath2ViewAction implements IObjectActionDelegate {
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
+	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 	}
 

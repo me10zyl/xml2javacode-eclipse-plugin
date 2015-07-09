@@ -253,10 +253,12 @@ public class Xml2JavaCodeView2 extends ViewPart {
 		e1.printStackTrace();
 	}
 
+	@Override
 	@PreDestroy
 	public void dispose() {
 	}
 
+	@Override
 	public void setFocus() {
 		// TODO Set the focus to control
 	}
