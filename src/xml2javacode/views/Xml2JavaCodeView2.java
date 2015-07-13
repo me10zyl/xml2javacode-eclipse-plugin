@@ -35,6 +35,14 @@ import org.eclipse.ui.part.ViewPart;
 public class Xml2JavaCodeView2 extends ViewPart {
 	private Text textXML;
 	private Text textDescriptionFile;
+	public Text getTextDescriptionFile() {
+		return textDescriptionFile;
+	}
+
+	public void setTextDescriptionFile(Text textDescriptionFile) {
+		this.textDescriptionFile = textDescriptionFile;
+	}
+
 	private Text textArea;
 	private CodeGenerator generator = new CodeGenerator();
 

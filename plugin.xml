@@ -5,11 +5,11 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="XML转Java"
+            name="xml2javacode"
             id="xml2javacode">
       </category>
       <view
-            name="XML转Java"
+            name="xml2javacode"
             icon="icons/sample.gif"
             category="xml2javacode"
             class="xml2javacode.views.Xml2JavaCodeView2"
@@ -56,6 +56,60 @@
                menubarPath="additions">
          </action>
       </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="xml2javacode.commands.category"
+            name="xml2javacode">
+      </category>
+      <command
+            categoryId="xml2javacode.commands.category"
+            defaultHandler="xml2javacode.handlers.AddFieldJavadocHandler"
+            id="xml2javacode.commands.addFieldJavadoc"
+            name="Add Field Javadoc">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="xml2javacode.handlers.AddFieldJavadocHandler"
+            commandId="xml2javacode.commands.sampleCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="xml2javacode.commands.addFieldJavadoc"
+               id="xml2javacode.commands.addFieldJavadoc"
+               mnemonic="S">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <reference
+                        definitionId="xml2javacode.javasourcefile">
+                  </reference></with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="xml2javacode.javasourcefile">
+         <iterate>
+            <adapt
+                  type="org.eclipse.core.resources.IResource">
+               <test
+                     property="org.eclipse.core.resources.contentTypeId"
+                     value="org.eclipse.jdt.core.javaSource">
+               </test>
+            </adapt>
+         </iterate>
+      </definition>
    </extension>
 
 </plugin>
