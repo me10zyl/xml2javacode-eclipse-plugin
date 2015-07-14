@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: xml2javacode
 Bundle-SymbolicName: xml2javacode;singleton:=true
-Bundle-Version: 1.0.0.snapshot
+Bundle-Version: 1.0
 Bundle-Activator: xml2javacode.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
