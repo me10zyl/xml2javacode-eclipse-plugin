@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: xml2javacode
-Bundle-SymbolicName: xml2javacode;singleton:=true
-Bundle-Version: 1.0
+Bundle-SymbolicName: net.xicp.zyl_me.xml2javacode;singleton:=true
+Bundle-Version: 1.1
 Bundle-Activator: xml2javacode.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

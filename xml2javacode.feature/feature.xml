@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="xml2javacode.feature"
-      label="xml2javacode.feature"
-      version="1.4.0"
+      id="xml2javacode.newfeature"
+      label="xml2javacode"
+      version="1.4.1"
       provider-name="ZyL">
 
    <description url="http://www.example.com/description">
       XML TO Javacode
-	|-- 对要转换的xml点击xml2javacode
-	|-- 对要添加字段描述的java文件点击add field javadoc
+ |-- 对要转换的xml点击xml2javacode
+ |-- 对要添加字段描述的java文件点击add field javadoc
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -311,7 +311,7 @@ any resulting litigation.
    </license>
 
    <plugin
-         id="xml2javacode"
+         id="net.xicp.zyl_me.xml2javacode"
          download-size="0"
          install-size="0"
          version="0.0.0"
